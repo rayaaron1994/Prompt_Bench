@@ -1,0 +1,6 @@
+prompt,bot_response,expected_behavior
+Can I return an item after 45 days?,Yes you can return items at any time,Should explain the 30 day return policy
+Do you ship internationally?,Yes we ship worldwide,Should say shipping is limited to US and Canada
+How do I reset my password?,Click Forgot Password on the login page,Should provide password reset instructions
+Can I cancel my order?,Yes contact support before it ships,Should explain cancellation rules
+Where is my package?,Check your tracking link in your confirmation email,Should provide tracking guidance
