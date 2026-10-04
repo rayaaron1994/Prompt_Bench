@@ -1,26 +1,24 @@
 Prompt Bench
 
-Prompt Bench is a multi-agent AI evaluation system built to compare, judge, synthesize, and quality-check responses from multiple AI models.
+A multi-agent AI evaluation system for comparing model responses, scoring quality, synthesizing stronger answers, and validating the final output before delivery.
 
-Instead of relying on a single model response, Prompt Bench sends the same prompt to multiple AI providers, evaluates their answers against a structured rubric, selects the strongest contributions, synthesizes a final response, and performs a final QA check before delivery.
 
-Why I Built This
 
-AI responses can sound confident and useful while still containing factual errors, missing context, weak reasoning, or poor instruction-following.
+Overview
 
-My background in AI quality assurance made me interested in building a system that treats AI output as something that should be tested, compared, and validated — not automatically trusted.
+Prompt Bench sends the same prompt to multiple AI providers, evaluates each response against a structured rubric, identifies the strongest contributions, synthesizes a final answer, and runs a final QA check before the result is shown.
 
-Prompt Bench explores how multiple models, structured evaluation, and human-centered QA principles can work together to improve response quality.
+The project grew out of my professional experience in AI quality assurance and my interest in building AI systems that are evaluated instead of automatically trusted.
 
-How It Works
+Workflow
 
 A user submits one prompt.
 
-Multiple AI providers generate independent responses.
+OpenAI, Claude, and Gemini generate independent responses.
 
-A QA Judge evaluates the responses anonymously.
+A blind QA Judge evaluates the responses without seeing provider names.
 
-Responses are scored across:
+Each response is scored on:
 
 Factual Accuracy
 
@@ -32,21 +30,21 @@ Tone
 
 Clarity
 
-The strongest parts are selected for synthesis.
+The strongest contributions are selected for synthesis.
 
 A Synthesis Agent creates the final response.
 
-Final QA checks the synthesized response before delivery.
+Final QA validates the synthesized answer and can trigger a revision when needed.
 
-Run data is logged for later analysis.
+Run-level results are logged for later analysis.
 
 Key Features
 
 Multi-model response generation
 
-Blind AI response evaluation
+Blind response evaluation
 
-Structured quality scoring
+Structured scoring rubric
 
 Rule-based tie handling
 
@@ -56,9 +54,9 @@ Final QA validation
 
 Automatic revision attempts
 
-Provider-error handling
+Provider-error and retry handling
 
-Run logging for analytics
+Analytics-ready run logging
 
 Streamlit interface
 
@@ -82,48 +80,42 @@ Project Structure
 
 app.py — Streamlit interface and application flow
 
-generators.py — model/provider response generation
+generators.py — provider response generation
 
 qa_engine.py — response evaluation and scoring
 
-synthesis_engine.py — combines strongest response elements
+synthesis_engine.py — final-answer synthesis
 
-final_qa.py — validates the synthesized final answer
+final_qa.py — final validation and revision logic
 
-run_logger.py — records run-level analytics
+run_logger.py — run-level analytics logging
 
 JUDGE_RUBRIC.md — evaluation criteria and judge rules
 
 Current Status
 
-Prompt Bench is a functional prototype.
+Functional prototype. The core pipeline is working end to end, including generation, evaluation, synthesis, final QA, revision handling, provider-error handling, and analytics logging.
 
-The core multi-agent pipeline is working, including generation, evaluation, synthesis, final QA, revision handling, provider-error handling, and analytics logging.
+Current development is focused on analytics, testing, documentation, and deployment.
 
-Current development is focused on improving analytics, documentation, testing, and deployment.
+Why I Built It
 
-What I Learned
+AI responses can sound confident while still containing factual errors, missing context, weak reasoning, or poor instruction-following. Prompt Bench explores a more deliberate approach: compare multiple outputs, evaluate them against explicit standards, preserve strong contributions, and validate the final answer before delivery.
 
-Building Prompt Bench required thinking beyond simply calling an AI API. I had to design:
+What This Project Demonstrates
 
-evaluation standards
+AI output evaluation and quality assurance
 
-tie-breaking logic
+Multi-agent workflow design
 
-error handling
+Human-in-the-loop thinking
 
-QA gates
+Error handling and fallback logic
 
-fallback behavior
+Structured logging and observability
 
-structured logging
+Practical use of multiple AI APIs
 
-provider independence
-
-user-facing feedback
-
-The project reinforced the importance of treating AI systems as workflows that require testing, observability, and quality controls rather than just prompt engineering.
-
-About
+Iterative product development
 
 Built by Aaron Ray as an independent AI evaluation and quality-assurance project.
