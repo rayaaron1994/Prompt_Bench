@@ -1,0 +1,5 @@
+.env
+pycache/
+*.pyc
+.DS_Store
+prompt_bench_runs.csv
