@@ -1,24 +1,50 @@
-Prompt Bench
+Multi-agent AI evaluation, synthesis, and final-answer quality control.
 
-A multi-agent AI evaluation system for comparing model responses, scoring quality, synthesizing stronger answers, and validating the final output before delivery.
+Prompt Bench sends one prompt to multiple AI models, evaluates their responses against a structured rubric, selects the strongest contributions, synthesizes a final answer, and runs a final QA check before delivery.
 
 
 
-Overview
+What it does
 
-Prompt Bench sends the same prompt to multiple AI providers, evaluates each response against a structured rubric, identifies the strongest contributions, synthesizes a final answer, and runs a final QA check before the result is shown.
+Stage
 
-The project grew out of my professional experience in AI quality assurance and my interest in building AI systems that are evaluated instead of automatically trusted.
+Purpose
 
-Workflow
+Generate
 
-A user submits one prompt.
+OpenAI, Claude, and Gemini answer the same prompt independently.
 
-OpenAI, Claude, and Gemini generate independent responses.
+Judge
 
-A blind QA Judge evaluates the responses without seeing provider names.
+Responses are evaluated blindly so provider identity does not influence scoring.
 
-Each response is scored on:
+Score
+
+Each response is rated on Factual Accuracy, Completeness, Relevance, Tone, and Clarity.
+
+Synthesize
+
+The strongest contributions are combined into one final response.
+
+Final QA
+
+The synthesized answer is checked before delivery and can trigger revision when needed.
+
+Log
+
+Run-level results are saved for later analysis and model-performance comparisons.
+
+Why I built it
+
+My background in AI quality assurance made me interested in a simple question:
+
+What happens if AI output is treated like something that should be tested, compared, and validated instead of automatically trusted?
+
+Prompt Bench is my answer to that question. It applies structured QA thinking to multi-model AI workflows so strong outputs are preserved, weak outputs are challenged, and the final answer passes through one more quality gate before being shown.
+
+Evaluation rubric
+
+The QA Judge scores each response across five dimensions:
 
 Factual Accuracy
 
@@ -30,21 +56,15 @@ Tone
 
 Clarity
 
-The strongest contributions are selected for synthesis.
+The judge evaluates responses anonymously, while provider identity is stored separately for later analytics.
 
-A Synthesis Agent creates the final response.
-
-Final QA validates the synthesized answer and can trigger a revision when needed.
-
-Run-level results are logged for later analysis.
-
-Key Features
+Key features
 
 Multi-model response generation
 
 Blind response evaluation
 
-Structured scoring rubric
+Structured quality scoring
 
 Rule-based tie handling
 
@@ -54,13 +74,13 @@ Final QA validation
 
 Automatic revision attempts
 
-Provider-error and retry handling
+Provider retry and fallback handling
 
 Analytics-ready run logging
 
 Streamlit interface
 
-Tech Stack
+Tech stack
 
 Python
 
@@ -76,33 +96,32 @@ CSV-based analytics logging
 
 Git / GitHub
 
-Project Structure
+Project structure
 
-app.py — Streamlit interface and application flow
+app.py               Streamlit interface and application flow
+generators.py        Provider response generation
+qa_engine.py         Blind evaluation and scoring
+synthesis_engine.py  Final-answer synthesis
+final_qa.py          Final validation and revision logic
+run_logger.py        Run-level analytics logging
+JUDGE_RUBRIC.md      Evaluation criteria and judge rules
+requirements.txt     Python dependencies
 
-generators.py — provider response generation
-
-qa_engine.py — response evaluation and scoring
-
-synthesis_engine.py — final-answer synthesis
-
-final_qa.py — final validation and revision logic
-
-run_logger.py — run-level analytics logging
-
-JUDGE_RUBRIC.md — evaluation criteria and judge rules
-
-Current Status
+Current status
 
 Functional prototype. The core pipeline is working end to end, including generation, evaluation, synthesis, final QA, revision handling, provider-error handling, and analytics logging.
 
-Current development is focused on analytics, testing, documentation, and deployment.
+Current development is focused on:
 
-Why I Built It
+expanding analytics and model-comparison reporting
 
-AI responses can sound confident while still containing factual errors, missing context, weak reasoning, or poor instruction-following. Prompt Bench explores a more deliberate approach: compare multiple outputs, evaluate them against explicit standards, preserve strong contributions, and validate the final answer before delivery.
+strengthening testing and edge-case coverage
 
-What This Project Demonstrates
+improving documentation
+
+preparing the project for deployment
+
+What this project demonstrates
 
 AI output evaluation and quality assurance
 
@@ -114,8 +133,28 @@ Error handling and fallback logic
 
 Structured logging and observability
 
-Practical use of multiple AI APIs
+Prompt and rubric design
 
-Iterative product development
+Python application development
+
+Translating QA experience into an AI product workflow
+
+Run locally
+
+Clone the repository.
+
+Create a virtual environment.
+
+Install dependencies:
+
+pip install -r requirements.txt
+
+Add your API credentials to a local .env file.
+
+Start the Streamlit app:
+
+streamlit run app.py
+
+API credentials and private run logs are intentionally excluded from the public repository.
 
 Built by Aaron Ray as an independent AI evaluation and quality-assurance project.
